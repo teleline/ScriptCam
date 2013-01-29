@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<title>
+			ScriptCam - use your webcam in Javascript JQuery
+		</title>
+		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+		<script language="JavaScript" src="scriptcam.js"></script> 
+		<link href="bootstrap.min.css" rel="stylesheet">
+		<script> 
+			$(document).ready(function() {
+				$("#webcam").scriptcam({
+					onError:onError,
+					onWebcamReady:onWebcamReady,
+					daeFilename: 'cow.dae',
+					daeMarker: 'cow_marker.pat'
+
+				});
+			});
+
+			function onError(errorId,errorMsg) {
+				alert(errorMsg);
+			}			
+			function changeCamera() {
+				$.scriptcam.changeCamera($('#cameraNames').val());
+			}
+			function onWebcamReady(cameraNames,camera,microphoneNames,microphone,volume) {
+				$.each(cameraNames, function(index, text) {
+					$('#cameraNames').append( $('<option></option>').val(index).html(text) )
+				}); 
+				$('#cameraNames').val(camera);
+			}
+		</script> 
+	</head>
+	<body>
+		<div style="width:330px;float:left;">
+			<div id="webcam">
+			</div>
+			<div style="margin:5px;">
+				<img src="webcamlogo.png" style="vertical-align:text-top"/>
+				<select id="cameraNames" size="1" onChange="changeCamera()" style="width:245px;font-size:10px;height:25px;">
+				</select>
+			</div>
+		</div>
+		<div>
+			<a href="ar_marker.pdf">Download marker in PDF format</a>
+		</div>
+	</body>
+</html>
