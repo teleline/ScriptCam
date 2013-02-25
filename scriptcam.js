@@ -5,7 +5,7 @@
 //  /\__/ / (__| |  | | |_) | |_| \__/\ (_| | | | | | |
 //  \____/ \___|_|  |_| .__/ \__|\____/\__,_|_| |_| |_|
 //                  | |                              
-//  Version 1.2.3   |_| (c) Tele-Line Videotex Services
+//  Version 1.3.0   |_| (c) Tele-Line Videotex Services
 
 // Use jscompress.com to compress this file
 
@@ -25,6 +25,8 @@
 			$.scriptcam.SC_fileReady=data.fileReady;
 			$.scriptcam.SC_onMotion=data.onMotion;
 			$.scriptcam.SC_onError=data.onError;
+			$.scriptcam.SC_onHandLeft=data.onHandLeft;
+			$.scriptcam.SC_onHandRight=data.onHandRight;
 			$.scriptcam.SC_onWebcamReady=data.onWebcamReady;
 			$.scriptcam.SC_connected=data.connected;
 			$.scriptcam.SC_onPictureAsBase64=data.onPictureAsBase64;
@@ -49,18 +51,42 @@
 				$('#'+data.chatWindow).append(value+'<br/>');
 				$('#'+data.chatWindow).animate({ scrollTop: $('#'+data.chatWindow).prop("scrollHeight") - $('#'+data.chatWindow).height() }, 100);
 			}
-			var newWidth=opts.width;
-			var newHeight=opts.height;
-			if (opts.chatRoom && opts.chatOrientation==0) {
-				newWidth=(newWidth*2)+opts.chatMargin; // make room for two horizontal video windows with a margin when chatting
-			};
-			if (opts.chatRoom && opts.chatOrientation==1) {
-				newHeight=(newHeight*2)+opts.chatMargin; // make room for two vertical video windows with a margin when chatting
-			};
-			// use GPU acceleration
-			var params = {
-				menu: 'false',
-				wmode: 'direct'
+			if (opts.canvasHeight && opts.canvasHeight) {
+				var newWidth=opts.canvasWidth;
+				var newHeight=opts.canvasHeight;
+			}
+			else {
+				// no canvas dimensions given, make our own horizontal layout
+				var newWidth=opts.width*opts.zoom;
+				var newHeight=opts.height*opts.zoom;
+				if (opts.chatRoom) {
+					newWidth=(opts.width*opts.zoom)+(opts.width*opts.zoomChat)+5; // make room for two horizontal video windows with a margin of 5
+					opts.posX=(opts.width*opts.zoom)+5;
+					newHeight=opts.height*Math.max(opts.zoom,opts.zoomChat);
+				};
+			}
+			// make new dimensions are not below minimum flash size
+			if (newWidth < 215) {
+				newWidth=215;
+			}
+			if (newHeight < 138) {
+				newHeight=138;
+			}
+			if (opts.rotate!=0 || opts.skewX!=0 || opts.skewY!=0 || opts.flip!=0 || opts.zoom!=1 || opts.zoomChat!=1) {
+				// no GPU acceleration
+				var params = {
+					menu: 'false',
+					wmode: 'window',
+					allowFullScreen:'true'
+				};
+			}
+			else {
+				// GPU acceleration when no filter is used
+				var params = {
+					menu: 'false',
+					wmode: 'direct',
+					allowFullScreen:'true'
+				};
 			};
 			// Escape all values contained in the flashVars (IE needs this)
 			for (var key in opts) {
@@ -89,7 +115,7 @@
 	$.scriptcam.getBarCode=function() {
 		return $('#'+data.id).get(0).SC_getBarCode();
 	}
-	
+
 	$.scriptcam.startRecording=function() {
 		$('#'+data.id).get(0).SC_startRecording();
 	}
@@ -128,8 +154,12 @@
 		height:240,
 		chatWindow:'chatWindow',
 		path:'',
-		chatOrientation:0,
-		chatMargin:5,
+		zoom:1,
+		zoomChat:1,
+		rotate:0,
+		skewX:0,
+		skewY:0,
+		flip:0,
 		noFlashFound:'<p>You need <a href="http://www.adobe.com/go/getflashplayer">Adobe Flash Player 11.4</a> to use this software.<br/>Please click on the link to download the installer.</p>'
 	};
 })(jQuery);
@@ -151,7 +181,12 @@ function SC_onMotion(decodedString) {
 function SC_promptWillShow() {
 	$.scriptcam.SC_promptWillShow();
 }
-
+function SC_onHandLeft() {
+	$.scriptcam.SC_onHandLeft();
+}
+function SC_onHandRight() {
+	$.scriptcam.SC_onHandRight();
+}
 function SC_onWebcamReady(cameraNames,camera,microphoneNames,microphone) {
 	$.scriptcam.SC_onWebcamReady(cameraNames,camera,microphoneNames,microphone);
 }
@@ -172,8 +207,8 @@ function SC_setVolume(value) {
 	$.scriptcam.SC_setVolume(value);
 }
 
-function SC_onMotion(motion,brightness,color,facearea) {
-	$.scriptcam.SC_onMotion(motion,brightness,color,facearea);
+function SC_onMotion(motion,brightness,color,motionx,motiony) {
+	$.scriptcam.SC_onMotion(motion,brightness,color,motionx,motiony);
 }
 
 function SC_timeLeft(value) {

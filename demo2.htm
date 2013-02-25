@@ -1,16 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 	<head>
-		<meta charset="utf-8">
-		<title>
-			ScriptCam - use your webcam in Javascript JQuery
-		</title>
 		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 		<script language="JavaScript" src="scriptcam.js"></script>
 		<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-		<link href="bootstrap.min.css" rel="stylesheet">
 		<style>
 			#webcam {
 				float:left;
@@ -59,19 +53,19 @@
 		<script>
 			$(document).ready(function() {
 				$("#webcam").scriptcam({ 
-					appID:'YOUR_APPID_HERE',
+					fileReady:fileReady,
 					onError:onError,
 					promptWillShow:promptWillShow,
 					showMicrophoneErrors:false,
 					onWebcamReady:onWebcamReady,
 					setVolume:setVolume,
 					timeLeft:timeLeft,
-					fileName:'YOUR_FILENAME_HERE',
+					fileName:'myfilename',
 					connected:showRecord
 				});
 				setVolume(0);
 				$("#slider").slider({ animate: true, min: 0, max: 100 , value: 50, orientation: 'vertical', disabled:true});
-				$("#slider" ).bind( "slidechange", function(event, ui) {
+				$("#slider").bind( "slidechange", function(event, ui) {
 					$.scriptcam.changeVolume($( "#slider" ).slider( "option", "value" ));
 				});
 			});
@@ -81,13 +75,27 @@
 			function startRecording() {
 				$( "#recordStartButton" ).attr( "disabled", true );
 				$( "#recordStopButton" ).attr( "disabled", false );
+				$( "#recordPauseResumeButton" ).attr( "disabled", false );
 				$.scriptcam.startRecording();
 			}
 			function closeCamera() {
 				$( "#slider" ).slider( "option", "disabled", true );
+				$( "#recordPauseResumeButton" ).attr( "disabled", true );
 				$( "#recordStopButton" ).attr( "disabled", true );
 				$.scriptcam.closeCamera();
-				window.location='demo2.htm';
+			}
+			function pauseResumeCamera() {
+				if ($( "#recordPauseResumeButton" ).html() == 'Pause Recording') {
+					$( "#recordPauseResumeButton" ).html( "Resume Recording" );
+					$.scriptcam.pauseRecording();
+				}
+				else {
+					$( "#recordPauseResumeButton" ).html( "Pause Recording" );
+					$.scriptcam.resumeRecording();
+				}
+			}
+			function fileReady(fileName) {
+				window.location='playback.cfm?name='+fileName;
 			}
 			function onError(errorId,errorMsg) {
 				alert(errorMsg);
@@ -177,12 +185,13 @@
 			<select id="microphoneNames" size="1" onChange="changeMicrophone()" style="width:128px;font-size:10px;height:25px;">
 			</select>
 		</div>
-		<hr style="margin-top:0px;margin-bottom:6px;"/>
+		<br/>
 		<button id="recordStartButton" class="btn btn-small" onclick="startRecording()" disabled>Start Recording</button>&nbsp;
-		<span style="padding-left:25px;padding-right:25px;">
+		<span style="padding-left:5px;padding-right:5px;">
 		Time left:
 		<input type="text" id="timeLeft" style="width:50px;font-size:10px;">&nbsp;
 		</span>
+		<button id="recordPauseResumeButton" class="btn btn-small" onclick="pauseResumeCamera()" disabled>Pause Recording</button>
 		<button id="recordStopButton" class="btn btn-small" onclick="closeCamera()" disabled>Stop Recording</button>
 	</body>
 </html>
