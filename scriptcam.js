@@ -1,11 +1,11 @@
-//   _____           _       _   _____                 
-//  /  ___|         (_)     | | /  __ \                
-//  \ `--.  ___ _ __ _ _ __ | |_| /  \/ __ _ _ __ ___  
-//   `--. \/ __| '__| | '_ \| __| |    / _` | '_ ` _ \ 
+//   _____           _       _   _____
+//  /  ___|         (_)     | | /  __ \
+//  \ `--.  ___ _ __ _ _ __ | |_| /  \/
+//   `--. \/ __| '__| | '_ \| __| |    / _` | '_ ` _ \
 //  /\__/ / (__| |  | | |_) | |_| \__/\ (_| | | | | | |
 //  \____/ \___|_|  |_| .__/ \__|\____/\__,_|_| |_| |_|
-//                  | |                              
-//  Version 1.3.1   |_| (c) Tele-Line Videotex Services
+//                  | |
+//  Version 1.3.2   |_| (c) Tele-Line Videotex Services
 
 // Use jscompress.com to compress this file
 
@@ -92,7 +92,7 @@
 			for (var key in opts) {
 				opts[key] = encodeURIComponent(opts[key]);
 			};
-			swfobject.embedSWF(data.path+'scriptcam.swf', opts.id, newWidth, newHeight, '11.4', false, opts, params);
+			swfobject.embedSWF(decodeURIComponent(data.path)+'scriptcam.swf', opts.id, newWidth, newHeight, '11.4', false, opts, params);
 		});
 	};
 	

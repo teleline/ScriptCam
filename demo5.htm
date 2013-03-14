@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -7,6 +8,7 @@
 			$(document).ready(function() {
 				$("#webcam").scriptcam({
 					onError:onError,
+					cornerRadius:0,
 					onWebcamReady:onWebcamReady
 				});
 			});
