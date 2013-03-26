@@ -5,7 +5,7 @@
 //  /\__/ / (__| |  | | |_) | |_| \__/\ (_| | | | | | |
 //  \____/ \___|_|  |_| .__/ \__|\____/\__,_|_| |_| |_|
 //                  | |
-//  Version 1.3.2   |_| (c) Tele-Line Videotex Services
+//  Version 1.4.0   |_| (c) Tele-Line Videotex Services
 
 // Use jscompress.com to compress this file
 
@@ -138,6 +138,10 @@
 
 	$.scriptcam.sendMessage=function(value) {
 		$('#'+data.id).get(0).SC_sendMessage(value);
+	}
+
+	$.scriptcam.playMP3=function(value) {
+		$('#'+data.id).get(0).SC_playMP3(value);
 	}
 
 	$.scriptcam.changeCamera=function(value) {
