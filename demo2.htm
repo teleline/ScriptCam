@@ -84,10 +84,11 @@
 				$.scriptcam.startRecording();
 			}
 			function closeCamera() {
-				$( "#slider" ).slider( "option", "disabled", true );
-				$( "#recordPauseResumeButton" ).attr( "disabled", true );
-				$( "#recordStopButton" ).attr( "disabled", true );
+				$("#slider").slider( "option", "disabled", true );
+				$("#recordPauseResumeButton" ).attr( "disabled", true );
+				$("#recordStopButton" ).attr( "disabled", true );
 				$.scriptcam.closeCamera();
+				$('#message').html('Please wait for the file conversion to finish...');
 			}
 			function pauseResumeCamera() {
 				if ($( "#recordPauseResumeButton" ).html() == 'Pause Recording') {
@@ -101,35 +102,16 @@
 			}
 			function fileReady(fileName) {
 				$('#recorder').hide();
-				$('#message').html('Please wait for the file conversion to finish...');
-				waitForMovie(fileName);
-			}
-			function waitForMovie(fileName) {
-				$.ajax("/dwnld/"+fileName, { 
-					statusCode: {
-						404: function() {
-							setTimeout(function(){
-								waitForMovie(fileName);
-							}, 5000);
-						},
-						200: function() {
-							loadMovie(fileName);
-						}
-					}
-				});
-			}
-			function loadMovie(fileName) {
-				$('#message').html('This file is now dowloadable for five minutes over <a href="http://www.scriptcam.com/dwnld/'+fileName+'">here</a>.');
+				$('#message').html('This file is now dowloadable for five minutes over <a href='+fileName+'">here</a>.');
 				var fileNameNoExtension=fileName.replace(".mp4", "");
 				jwplayer("mediaplayer").setup({
 					width:320,
 					height:240,
-					file: "/dwnld/"+fileName,
-					image: "/dwnld/"+fileNameNoExtension+"_0000.jpg"
+					file: fileName,
+					image: fileNameNoExtension+"_0000.jpg"
 				});
 				$('#mediaplayer').show();
-
-			}			
+			}
 			function onError(errorId,errorMsg) {
 				alert(errorMsg);
 			}

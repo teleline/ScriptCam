@@ -5,7 +5,7 @@
 //  /\__/ / (__| |  | | |_) | |_| \__/\ (_| | | | | | |
 //  \____/ \___|_|  |_| .__/ \__|\____/\__,_|_| |_| |_|
 //                  | |
-//  Version 1.4.0   |_| (c) Tele-Line Videotex Services
+//  Version 1.4.1   |_| (c) Tele-Line Videotex Services
 
 // Use jscompress.com to compress this file
 
@@ -77,7 +77,8 @@
 				var params = {
 					menu: 'false',
 					wmode: 'window',
-					allowFullScreen:'true'
+					allowscriptaccess: 'always',
+					allowFullScreen: 'true'
 				};
 			}
 			else {
@@ -85,7 +86,8 @@
 				var params = {
 					menu: 'false',
 					wmode: 'direct',
-					allowFullScreen:'true'
+					allowscriptaccess: 'always',
+					allowFullScreen: 'true'
 				};
 			};
 			// Escape all values contained in the flashVars (IE needs this)
