@@ -5,7 +5,7 @@
 //  /\__/ / (__| |  | | |_) | |_| \__/\ (_| | | | | | |
 //  \____/ \___|_|  |_| .__/ \__|\____/\__,_|_| |_| |_|
 //                  | |
-//  Version 1.4.1   |_| (c) Tele-Line Videotex Services
+//  Version 1.4.2   |_| (c) Tele-Line Videotex Services
 
 // Use jscompress.com to compress this file
 
@@ -94,7 +94,7 @@
 			for (var key in opts) {
 				opts[key] = encodeURIComponent(opts[key]);
 			};
-			swfobject.embedSWF(decodeURIComponent(data.path)+'scriptcam.swf', opts.id, newWidth, newHeight, '11.4', false, opts, params);
+			swfobject.embedSWF(decodeURIComponent(data.path)+'scriptcam.swf', opts.id, newWidth, newHeight, '11.6', false, opts, params);
 		});
 	};
 	
@@ -166,7 +166,7 @@
 		skewX:0,
 		skewY:0,
 		flip:0,
-		noFlashFound:'<p>You need <a href="http://www.adobe.com/go/getflashplayer">Adobe Flash Player 11.4</a> to use this software.<br/>Please click on the link to download the installer.</p>'
+		noFlashFound:'<p>You need <a href="http://www.adobe.com/go/getflashplayer">Adobe Flash Player 11.6</a> to use this software.<br/>Please click on the link to download the installer.</p>'
 	};
 })(jQuery);
 
