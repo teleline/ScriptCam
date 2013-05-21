@@ -5,7 +5,7 @@
 //  /\__/ / (__| |  | | |_) | |_| \__/\ (_| | | | | | |
 //  \____/ \___|_|  |_| .__/ \__|\____/\__,_|_| |_| |_|
 //                  | |
-//  Version 1.4.5   |_| (c) Tele-Line Videotex Services
+//  Version 1.4.6   |_| (c) Tele-Line Videotex Services
 
 // Use jscompress.com to compress this file
 
