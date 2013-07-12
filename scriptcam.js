@@ -5,7 +5,7 @@
 //  /\__/ / (__| |  | | |_) | |_| \__/\ (_| | | | | | |
 //  \____/ \___|_|  |_| .__/ \__|\____/\__,_|_| |_| |_|
 //                  | |
-//  Version 1.4.8   |_| (c) Tele-Line Videotex Services
+//  Version 1.5.0   |_| (c) Tele-Line Videotex Services
 
 // Use jscompress.com to compress this file
 
@@ -77,7 +77,7 @@
 				var params = {
 					menu: 'false',
 					wmode: 'window',
-					allowscriptaccess: 'always',
+					allowScriptAccess: 'always',
 					allowFullScreen: 'true'
 				};
 			}
@@ -86,7 +86,7 @@
 				var params = {
 					menu: 'false',
 					wmode: 'direct',
-					allowscriptaccess: 'always',
+					allowScriptAccess: 'always',
 					allowFullScreen: 'true'
 				};
 			};
@@ -108,6 +108,10 @@
 
 	$.scriptcam.version=function() {
 		return $('#'+data.id).get(0).SC_version();
+	}
+
+	$.scriptcam.hardwareacceleration=function() {
+		return $('#'+data.id).get(0).SC_hardwareacceleration();
 	}
 
 	$.scriptcam.getMotionParameters=function() {
@@ -166,7 +170,7 @@
 		skewX:0,
 		skewY:0,
 		flip:0,
-		noFlashFound:'<p>You need <a href="http://www.adobe.com/go/getflashplayer">Adobe Flash Player 11.6</a> to use this software.<br/>Please click on the link to download the installer.</p>'
+		noFlashFound:'<p>You need <a href="http://www.adobe.com/go/getflashplayer">Adobe Flash Player 11.7</a> to use this software.<br/>Please click on the link to download the installer.</p>'
 	};
 })(jQuery);
 
