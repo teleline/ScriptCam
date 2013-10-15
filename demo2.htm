@@ -35,7 +35,7 @@
 				height:32px;
 				margin-left:7px;
 				margin-bottom:-16px;
-				background:url(volumeslider.png) no-repeat; 
+				background:url(volumeslider.png) no-repeat;
 			}
 			#volumePanel {
 				-moz-border-radius: 0px 5px 5px 0px;
@@ -55,7 +55,7 @@
 		</style>
 		<script>
 			$(document).ready(function() {
-				$("#webcam").scriptcam({ 
+				$("#webcam").scriptcam({
 					fileReady:fileReady,
 					cornerRadius:20,
 					cornerColor:'e3e5e2',
@@ -102,7 +102,7 @@
 			}
 			function fileReady(fileName) {
 				$('#recorder').hide();
-				$('#message').html('This file is now dowloadable for five minutes over <a href='+fileName+'">here</a>.');
+				$('#message').html('This file is now downloadable for five minutes over <a href="'+fileName+'">here</a>.');
 				var fileNameNoExtension=fileName.replace(".mp4", "");
 				jwplayer("mediaplayer").setup({
 					width:320,
@@ -120,11 +120,11 @@
 				$( "#slider" ).slider( "option", "value", volume );
 				$.each(cameraNames, function(index, text) {
 					$('#cameraNames').append( $('<option></option>').val(index).html(text) )
-				}); 
+				});
 				$('#cameraNames').val(camera);
 				$.each(microphoneNames, function(index, text) {
 					$('#microphoneNames').append( $('<option></option>').val(index).html(text) )
-				}); 
+				});
 				$('#microphoneNames').val(microphone);
 			}
 			function promptWillShow() {
