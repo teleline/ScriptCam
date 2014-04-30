@@ -5,7 +5,7 @@
 //  /\__/ / (__| |  | | |_) | |_| \__/\ (_| | | | | | |
 //  \____/ \___|_|  |_| .__/ \__|\____/\__,_|_| |_| |_|
 //                  | |
-//  Version 1.5.1   |_| (c) Tele-Line Videotex Services
+//  Version 1.5.2   |_| (c) Tele-Line Videotex Services
 
 // Use jscompress.com to compress this file
 
@@ -23,6 +23,7 @@
 			// forward incoming flash movie calls to outgoing functions
 			$.scriptcam.SC_promptWillShow=data.promptWillShow;
 			$.scriptcam.SC_fileReady=data.fileReady;
+			$.scriptcam.SC_fileConversionStarted=data.fileConversionStarted;
 			$.scriptcam.SC_onMotion=data.onMotion;
 			$.scriptcam.SC_onError=data.onError;
 			$.scriptcam.SC_onHandLeft=data.onHandLeft;
@@ -182,6 +183,10 @@ function SC_onError(errorId,errorMsg) {
 
 function SC_fileReady(fileName) {
 	$.scriptcam.SC_fileReady(fileName);
+}
+
+function SC_fileConversionStarted(fileName) {
+	$.scriptcam.SC_fileConversionStarted(fileName);
 }
 
 function SC_onMotion(decodedString) {
