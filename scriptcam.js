@@ -5,7 +5,7 @@
 //  /\__/ / (__| |  | | |_) | |_| \__/\ (_| | | | | | |
 //  \____/ \___|_|  |_| .__/ \__|\____/\__,_|_| |_| |_|
 //                  | |
-//  Version 1.5.4   |_| (c) Tele-Line Videotex Services
+//  Version 1.5.5   |_| (c) Tele-Line Videotex Services
 
 // Use jscompress.com to compress this file
 
@@ -34,6 +34,8 @@
 			$.scriptcam.SC_disconnected=data.disconnected;
 			$.scriptcam.SC_setVolume=data.setVolume;
 			$.scriptcam.SC_timeLeft=data.timeLeft;
+			$.scriptcam.SC_userLeft=data.userLeft;
+			$.scriptcam.SC_userJoined=data.userJoined;
 			$.scriptcam.SC_addChatText=function(value) {
 				value = value.replace(":{", '<img src="'+data.path+'angry.gif" width="16" height="16" class="smiley"/>');
 				value = value.replace(":-{", '<img src="'+data.path+'angry.gif" width="16" height="16" class="smiley"/>');
@@ -232,4 +234,12 @@ function SC_timeLeft(value) {
 
 function SC_addChatText(value) {
 	$.scriptcam.SC_addChatText(value);
+}
+
+function SC_userJoined(value) {
+	$.scriptcam.SC_userJoined(value);
+}
+
+function SC_userLeft(value) {
+	$.scriptcam.SC_userLeft(value);
 }
