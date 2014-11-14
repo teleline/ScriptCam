@@ -5,7 +5,7 @@
 //  /\__/ / (__| |  | | |_) | |_| \__/\ (_| | | | | | |
 //  \____/ \___|_|  |_| .__/ \__|\____/\__,_|_| |_| |_|
 //                  | |
-//  Version 1.5.6   |_| (c) Tele-Line Videotex Services
+//  Version 1.5.7   |_| (c) Tele-Line Videotex Services
 
 // Use jscompress.com to compress this file
 
@@ -97,9 +97,21 @@
 			for (var key in opts) {
 				opts[key] = encodeURIComponent(opts[key]);
 			};
-			swfobject.embedSWF(decodeURIComponent(data.path)+'scriptcam.swf', opts.id, newWidth, newHeight, '11.6', false, opts, params);
+			if (fileExists(decodeURIComponent(data.path)+'scriptcam.swf')) {
+				swfobject.embedSWF(decodeURIComponent(data.path)+'scriptcam.swf', opts.id, newWidth, newHeight, '11.6', false, opts, params);
+			}
+			else {
+				alert(decodeURIComponent(data.path)+'scriptcam.swf not found, please check the path parameter');
+			}
 		});
 	};
+
+	function fileExists(url) {
+		var http = new XMLHttpRequest();
+		http.open('HEAD', url, false);
+		http.send();
+		return http.status==200;
+	}
 	
 	$.scriptcam={};
 	
