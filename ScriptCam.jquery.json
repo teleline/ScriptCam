@@ -1,6 +1,6 @@
 {
     "name": "ScriptCam",
-    "version": "1.5.7",
+    "version": "1.6.0",
     "title": "ScriptCam - use your webcam in jquery",
     "author": {
         "name": "Tele-Line Videotex Services VZW",
@@ -18,6 +18,9 @@
     "description": "ScriptCam is a popular JQuery plugin to manipulate webcams. Take snapshots, detect movement and colors, record videoclips, generate animated GIFs, make thumbnails and organize one-to-one and one-to-many videochats using JavaScript on your own site. Impress your clients and visitors with this multi-language and fully customizable library.",
     "keywords": [
         "webcam",
+		"flash",
+		"html5",
+		"chat",
         "camera",
         "record",
 		"qr",
